@@ -1,18 +1,19 @@
 package com.kotlin.movie.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.kotlin.movie.R
-import com.kotlin.movie.dto.StackItemDTO
+import com.kotlin.movie.dto.MovieDTO
 
-class HomeStackAdapter: ArrayAdapter<StackItemDTO>{
+class HomeStackAdapter: ArrayAdapter<MovieDTO>{
 
-    constructor( context: Context, resource: Int, items: ArrayList<StackItemDTO>): super(context,resource, items)
+    constructor( context: Context, resource: Int, items: ArrayList<MovieDTO>): super(context,resource, items)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var convert = convertView
@@ -21,14 +22,16 @@ class HomeStackAdapter: ArrayAdapter<StackItemDTO>{
             val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convert = inflater.inflate(R.layout.home_item_stack, parent, false)
         }
-        val stkItem = getItem(position)
+        val movItem = getItem(position)
 
-        if( stkItem != null){
-            val title: TextView = convert!!.findViewById(R.id.txtTitle) as TextView
-            val img: ImageView = convert.findViewById(R.id.imgPoster) as ImageView
+        if( movItem != null){
+            val img: ImageView = convert!!.findViewById(R.id.imgPoster)
 
-            title.text = stkItem.titulo
-            img.setImageDrawable(stkItem.img)
+            Glide.with( context ).load(movItem.getPosterImg())
+                .placeholder(android.R.drawable.progress_indeterminate_horizontal)
+                .error(android.R.drawable.stat_notify_error)
+                .into(img)
+
         }
 
         return convert!!
