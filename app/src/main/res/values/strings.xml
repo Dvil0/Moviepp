@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Moviepp</string>
+
+    <!-- LABELS -->
     <string name="title">Popular</string>
+    <string name="title_top">Top</string>
+
+    <!-- BUTTONS -->
+    <string name="btn_popular">Popular</string>
+    <string name="btn_top">Top</string>
+    <string name="btn_last">Last</string>
+    <string name="btn_upcoming">Upcoming</string>
 </resources>
